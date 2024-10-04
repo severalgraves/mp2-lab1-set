@@ -10,6 +10,29 @@ TEST(TSet, can_get_max_power_set)
   EXPECT_EQ(size, set.GetMaxPower());
 }
 
+TEST(TSet, can_delete_all_elements) // test 1
+{
+	
+	TSet set(5);
+
+	set.InsElem(0);
+	set.InsElem(1);
+
+	set.DelElem(0);
+	set.DelElem(1);
+
+	EXPECT_EQ(set.IsMember(0), 0);
+	EXPECT_EQ(set.IsMember(1), 0);
+}
+
+TEST(TSet, can_make_copy_right_max_power)	// test 2
+{
+	TSet a(10);
+	TSet b = a;
+	EXPECT_EQ(10, b.GetMaxPower());
+}
+
+
 TEST(TSet, can_insert_non_existing_element)
 {
   const int size = 5, k = 3;

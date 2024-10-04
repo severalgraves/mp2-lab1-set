@@ -6,6 +6,41 @@ TEST(TBitField, can_create_bitfield_with_positive_length)
 {
   ASSERT_NO_THROW(TBitField bf(3));
 }
+TEST(TBitField, can_clear_bit_twice) // test 1
+{
+    TBitField bf(4), resBf(4);
+
+    bf.SetBit(1);
+    bf.SetBit(2);
+    bf.ClrBit(1);
+    bf.ClrBit(1);
+    resBf.SetBit(2);
+
+    EXPECT_EQ(bf, resBf);
+}
+
+TEST(TBitField, can_copy_right_bit_len) // test2
+{
+    TBitField a(10);
+    TBitField b = a;
+
+    EXPECT_EQ(10, b.GetLength());
+}
+
+TEST(TBitField, two_bitfields_are_equal_if_they_have_same_bits)// test 3
+{
+
+    TBitField bf1(6), bf2(6);
+
+    bf1.SetBit(1);
+    bf1.SetBit(3);
+
+    bf2.SetBit(1);
+    bf2.SetBit(3);
+
+    EXPECT_EQ(bf1, bf2);
+}
+
 
 TEST(TBitField, can_get_length)
 {
