@@ -60,7 +60,7 @@ void TSet::DelElem(const int Elem) // исключение элемента мн
     }
     else
     {
-        throw std::out_of_range("Element out of range!");
+        throw ("Element out of range!");
     }
 }
 

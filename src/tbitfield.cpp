@@ -103,7 +103,7 @@ int TBitField::GetBit(const int n) const // получить значение б
 
 // битовые операции
 
-TBitField& TBitField::operator=(const TBitField &bf) // присваивание
+TBitField& TBitField::operator=(const TBitField& bf) // присваивание
 {
     BitLen = bf.BitLen;
     MemLen = bf.MemLen;
@@ -128,7 +128,7 @@ int TBitField::operator==(const TBitField &bf) const // сравнение
 
 int TBitField::operator!=(const TBitField &bf) const // сравнение
 {
-    return !(*this == bf);
+    return ~(*this == bf);
 }
 
 TBitField TBitField::operator|(const TBitField &bf) // операция "или"
@@ -162,10 +162,12 @@ TBitField TBitField::operator&(const TBitField &bf) // операция "и"
 
 TBitField TBitField::operator~(void) // отрицание
 {
+    TBitField res(*this);
     for (int i = 0; i < MemLen; i++)
-        pMem[i] = ~pMem[i];
-    pMem[MemLen - 1] = pMem[MemLen - 1] & (GetMemMask(8 * MemLen - BitLen) - 1);
-    return *this;
+        res.pMem[i] = ~(pMem[i]);
+    TELEM d = ((TELEM)1 << (BitLen % (sizeof(TELEM) * 8))) - (TELEM)1;
+    res.pMem[MemLen - 1] &= d;
+    return res;
 }
 
 // ввод/вывод
