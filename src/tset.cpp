@@ -54,7 +54,7 @@ void TSet::InsElem(const int Elem) // включение элемента мно
 
 void TSet::DelElem(const int Elem) // исключение элемента множества
 {
-    if (Elem > 0 || Elem < MaxPower)
+    if (Elem >= 0 || Elem < MaxPower)
     {
         BitField.ClrBit(Elem);
     }
