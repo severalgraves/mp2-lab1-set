@@ -33,7 +33,7 @@ TBitField::TBitField(const TBitField &bf) // конструктор копиро
     BitLen = bf.BitLen;
     MemLen = bf.MemLen;
     pMem = new TELEM[MemLen];
-    if (bf.pMem != nullptr) {
+    if (pMem != nullptr) {
         for (int i = 0; i < MemLen; i++) {
             pMem[i] = bf.pMem[i];
         }
