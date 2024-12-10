@@ -2,6 +2,47 @@
 
 #include <gtest.h>
 
+class Fixtures : public ::testing::Test
+{
+protected:
+
+	void SetUp()
+	{
+		s = new TSet(5);
+	}
+
+	void TearDown()
+	{
+		delete s;
+	}
+
+	TSet* s;
+
+};
+
+TEST_F(Fixtures, can_get_max_power_set)
+{
+	EXPECT_EQ(5, s->GetMaxPower());
+}
+
+TEST_F(Fixtures, can_insert_existing_element)
+{
+	const int k = 3;
+
+	s->InsElem(k);
+	s->InsElem(k);
+
+	EXPECT_NE(s->IsMember(k), 0);
+}
+
+TEST_F(Fixtures, can_insert_non_existing_element)
+{
+	const int k = 3;
+	s->InsElem(k);
+	EXPECT_NE(s->IsMember(k), 0);
+}
+
+
 TEST(TSet, can_get_max_power_set)
 {
   const int size = 5;

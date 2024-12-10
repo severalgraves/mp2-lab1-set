@@ -2,6 +2,51 @@
 
 #include <gtest.h>
 
+
+class Fixtures : public ::testing::Test
+{
+protected:
+
+    void SetUp()
+    {
+        bf = new TBitField(5);
+        bf->SetBit(1);
+        bf->SetBit(2);
+        bf->SetBit(3);
+    }
+
+    void TearDown()
+    {
+        delete bf;
+    }
+
+    TBitField* bf;
+};
+
+TEST_F(Fixtures, can_get_length)
+{
+    EXPECT_EQ(5, bf->GetLength());
+}
+
+TEST_F(Fixtures, new_bitfield_is_set_to_zero)
+{
+    int sum = 0;
+
+    for (int i = 0; i < bf->GetLength(); i++)
+        sum += bf->GetBit(i);
+
+    EXPECT_EQ(3, sum);
+}
+
+TEST_F(Fixtures, can_set_bit)
+{
+
+    EXPECT_EQ(0, bf->GetBit(0));
+
+    bf->SetBit(0);
+    EXPECT_NE(0, bf->GetBit(0));
+}
+
 TEST(TBitField, can_create_bitfield_with_positive_length)
 {
   ASSERT_NO_THROW(TBitField bf(3));
